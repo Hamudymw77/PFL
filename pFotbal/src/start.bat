@@ -3,8 +3,6 @@ echo.
 echo === Training Planner CLI ===
 echo.
 
-:: This script assumes it is placed inside the 'src' folder.
-:: Tento skript predpoklada, ze je umisten uvnitr slozky 'src'.
 :: يفترض هذا البرنامج النصي أنه موجود داخل مجلد 'src'
 cd ..
 echo Changing directory to project root: %cd%
@@ -55,5 +53,6 @@ if not "%MAIN_CMD%"=="" (
     echo خطأ فادح: لم يتم العثور على بايثون. لا يمكن تشغيل المشروع.
     echo =======================================================
 )
+
 
 pause
