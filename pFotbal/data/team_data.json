@@ -1,0 +1,39 @@
+{
+    "players": [
+        {
+            "id": 1,
+            "name": "Jan Novák",
+            "position": "Defender"
+        }
+    ],
+    "exercise_types": [
+        {
+            "code": "SPRINT",
+            "description": "Short distance running training.",
+            "parameters_metadata": {
+                "distance_m": "float",
+                "repetitions": "int"
+            }
+        }
+    ],
+    "training_plans": [
+        {
+            "id": 101,
+            "player_id": 1,
+            "date_assigned": "2025-12-02",
+            "target_completion_date": null,
+            "status": "Pending",
+            "exercises": [
+                {
+                    "id": 1,
+                    "type_code": "SPRINT",
+                    "specific_parameters": {
+                        "distance_m": 50.0,
+                        "repetitions": 10,
+                        "status": "Completed"
+                    }
+                }
+            ]
+        }
+    ]
+}
