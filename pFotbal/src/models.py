@@ -1,8 +1,7 @@
-# src/models.py
+
 from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional
 
-# Constants for Training Plan Status
 # Konstanty pro stav treninkoveho planu
 # ثوابت لحالة خطة التدريب
 STATUS_PENDING = "Pending"
@@ -55,4 +54,5 @@ class SystemData:
     # الحاوية الرئيسية لتخزين كافة البيانات
     players: List[Player] = field(default_factory=list)
     exercise_types: List[ExerciseType] = field(default_factory=list)
+
     training_plans: List[TrainingPlan] = field(default_factory=list)
