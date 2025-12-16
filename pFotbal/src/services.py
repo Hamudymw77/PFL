@@ -14,11 +14,9 @@ from src.models import (
     STATUS_PENDING, STATUS_COMPLETED
 )
 
-# --- Dekorátor pro Paralelismus ---
 def run_in_thread(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        # Spustime ulozeni v novem vlakne na pozadi.
         # We start saving in a new background thread.
         # نبدأ الحفظ في خيط خلفي جديد
         thread = threading.Thread(target=func, args=args, kwargs=kwargs)
@@ -35,12 +33,10 @@ class JSONEncoder(json.JSONEncoder):
 
 class DataManager:
     """Handles saving and loading the SystemData object."""
-    # Stara se o ukladani a nacitani SystemData objektu.
     # يتعامل مع حفظ وتحميل كائن بيانات النظام
     
     def _create_empty_data_if_needed(self):
         """Creates initial data file and structure."""
-        # Vytvori pocatecni datovy soubor a strukturu.
         # ينشئ ملف وهيكل بيانات أولي
         if not os.path.exists(os.path.dirname(DATA_FILE_PATH)):
             os.makedirs(os.path.dirname(DATA_FILE_PATH))
@@ -60,7 +56,6 @@ class DataManager:
 
     def load_data(self) -> SystemData:
         """Loads data from file and performs deserialization."""
-        # Nacte data ze souboru.
         # يحمل البيانات من الملف
         self._create_empty_data_if_needed()
         with open(DATA_FILE_PATH, 'r', encoding='utf-8') as f:
@@ -86,7 +81,6 @@ class DataManager:
     @run_in_thread
     def save_data(self, system_data: SystemData):
         """Saves the current state of SystemData object to JSON file in a separate thread (PARALLELISM)."""
-        # Ulozi data do JSON souboru v samostatnem vlakne (PARALELISMUS).
         # يحفظ البيانات في ملف JSON في خيط منفصل (توازي)
         try:
             with open(DATA_FILE_PATH, 'w', encoding='utf-8') as f:
@@ -115,12 +109,11 @@ class DataManager:
 
 class TrainingService:
     """Contains business logic for managing exercises and plans."""
-    # Obsahuje obchodni logiku.
     
     def __init__(self, dm: DataManager):
         self.dm = dm
 
-    # ... (Ostatní metody TrainingService pro create_training_plan, add_exercise_to_plan, mark_exercise_completed, get_plan_summary) ...
+    # (Ostatní metody TrainingService
     
     def find_player(self, system_data: SystemData, player_id: int) -> Optional[Player]:
         return next((p for p in system_data.players if p.id == player_id), None)
@@ -192,4 +185,5 @@ class TrainingService:
             "completed": completed_units,
             "pending": total_units - completed_units,
             "completion_percentage": f"{completed_units / total_units * 100:.1f}%" if total_units > 0 else "N/A"
+
         }
